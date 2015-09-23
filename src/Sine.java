@@ -16,7 +16,7 @@ public class Sine {
 
 	public static void main(String args[]) {
 		
-		if(args.length != 3) {
+		if(args.length != 2) {
 			System.err.println("Usage: Sine x n");
 			System.exit(1);
 		}
