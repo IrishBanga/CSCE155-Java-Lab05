@@ -1,0 +1,251 @@
+\documentclass[12pt]{scrartcl}
+
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.25cm}
+
+\usepackage{graphicx}
+
+\usepackage{xcolor}
+
+\definecolor{darkred}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\usepackage{hyperref}
+\hypersetup{
+  letterpaper,
+  colorlinks,
+  linkcolor=red,
+  citecolor=darkgreen,
+  menucolor=darkred,
+  urlcolor=blue,
+  pdfpagemode=none,
+  pdftitle={CS1 - Lab 5.0 - Java},
+  pdfauthor={Christopher M. Bourke},
+  pdfkeywords={}
+}
+
+\definecolor{MyDarkBlue}{rgb}{0,0.08,0.45}
+\definecolor{MyDarkRed}{rgb}{0.45,0.08,0}
+\definecolor{MyDarkGreen}{rgb}{0.08,0.45,0.08}
+
+\definecolor{mintedBackground}{rgb}{0.95,0.95,0.95}
+\definecolor{mintedInlineBackground}{rgb}{.90,.90,1}
+
+%\usepackage{newfloat}
+\usepackage[newfloat=true]{minted}
+\setminted{mathescape,
+               linenos,
+               autogobble,
+               frame=none,
+               framesep=2mm,
+               framerule=0.4pt,
+               %label=foo,
+               xleftmargin=2em,
+               xrightmargin=0em,
+               startinline=true,  %PHP only, allow it to omit the PHP Tags *** with this option, variables using dollar sign in comments are treated as latex math
+               numbersep=10pt, %gap between line numbers and start of line
+               style=default, %syntax highlighting style, default is "default"
+               			    %gallery: http://help.farbox.com/pygments.html
+			    	    %list available: pygmentize -L styles
+               bgcolor=mintedBackground} %prevents breaking across pages
+               
+\setmintedinline{bgcolor={mintedBackground}}
+\setminted[text]{bgcolor={mintedBackground},linenos=false,autogobble,xleftmargin=1em}
+%\setminted[php]{bgcolor=mintedBackgroundPHP} %startinline=True}
+\SetupFloatingEnvironment{listing}{name=Code Sample}
+\SetupFloatingEnvironment{listing}{listname=List of Code Samples}
+
+\title{CSCE 155 - Java}
+\subtitle{Lab 5.0 - Methods}
+\author{~}
+\date{~}
+
+\begin{document}
+
+\maketitle
+
+\section*{Prior to Lab}
+
+Before attending this lab:
+\begin{enumerate}
+  \item Read and familiarize yourself with this handout.
+  \item Review the lecture notes on conditionals, or the following free textbook resource: \url{http://www.toves.org/books/java/ch12-methods/index.html}
+\end{enumerate}
+
+\section*{Peer Programming Pair-Up}
+
+To encourage collaboration and a team environment, labs will be
+structured in a \emph{pair programming} setup.  At the start of
+each lab, you will be randomly paired up with another student 
+(conflicts such as absences will be dealt with by the lab instructor).
+One of you will be designated the \emph{driver} and the other
+the \emph{navigator}.  
+
+The navigator will be responsible for reading the instructions and
+telling the driver what to do next.  The driver will be in charge of the
+keyboard and workstation.  Both driver and navigator are responsible
+for suggesting fixes and solutions together.  Neither the navigator
+nor the driver is ``in charge.''  Beyond your immediate pairing, you
+are encouraged to help and interact and with other pairs in the lab.
+
+Each week you should alternate: if you were a driver last week, 
+be a navigator next, etc.  Resolve any issues (you were both drivers
+last week) within your pair.  Ask the lab instructor to resolve issues
+only when you cannot come to a consensus.  
+
+Because of the peer programming setup of labs, it is absolutely 
+essential that you complete any pre-lab activities and familiarize
+yourself with the handouts prior to coming to lab.  Failure to do
+so will negatively impact your ability to collaborate and work with 
+others which may mean that you will not be able to complete the
+lab.  
+
+\section{Lab Objectives \& Topics}
+At the end of this lab you should be familiar with the following
+\begin{itemize}
+  \item Know how to write and use methods
+  \item Know the difference between a method prototype and method definition
+\end{itemize}
+
+\section{Background}
+
+Most programming languages allow you to define and use functions 
+(or methods).  Functions are reusable blocks of code that can be 
+packaged as a single unit.  A function can be specified to inputs 
+(parameters, arguments) and return an output.  Defining functions 
+has several advantages.  First, it facilitates code reuse.  Rather than 
+cutting and pasting the same block of code, it can be encapsulated 
+into a function and reused by calling the function anytime it needs 
+to be executed.
+
+Second, functions facilitate \emph{procedural abstraction}.  Often 
+times, we don't care or need to worry about the implementation 
+details of a certain algorithm or procedure.  By encapsulating the 
+details in a function, we only need to know how to use it (what 
+inputs to provide it and what output we can expect from it) and 
+not need to worry about how it computes its result.  For example,
+up to now you've been using the standard math library's function
+to compute the square root of a number $x$, but you haven't
+had to worry about the details of how this computation actually
+takes place.
+
+When defining a function, it is necessary to declare its \emph{signature}.  
+The signature of a function includes:
+\begin{itemize}
+  \item The function's identifier -- its name 
+  \item The return type -- the type of variable the function returns)
+  \item The parameter list -- the number of parameters the function takes 
+	(also called its \emph{arity}) along with the types 
+\end{itemize}
+
+\subsection{Methods in Java}
+
+In Java, functions (usually called methods) must be declared/defined 
+within a class.  This is done by declaring the method?s signature and 
+adding a block of code that specifies the instructions that will be executed 
+when the method is invoked.  In addition, there are two modifiers that 
+can be applied to methods:
+\begin{itemize}
+  \item \mintinline{java}{public} -- this specifies that the method is publicly 
+  	visible and can be invoked by any other method.  Alternatives include 
+	\mintinline{java}{private} (the method is only visible within the class) 
+	and \mintinline{java}{protected} (the method is visible within the class 
+	and any subclasses)
+  \item \mintinline{java}{static} -- this specifies that the method belongs to the 
+	class and not to instances of the class.
+\end{itemize}
+
+\section{Activities}
+
+We have provided partially completed programs for each of the 
+following activities.  Clone the lab's code from GitHub using the 
+following URL: \url{https://github.com/cbourke/CSCE155-Java-Lab05}.
+
+\subsection{Using Methods}
+
+The file \mintinline{text}{OrderStatistic.java} contains code necessary
+to find the $i$-th order statistic of a collection of numbers.   The $i$-th order 
+statistic corresponds to the $i$-th element in a sorted list.  For example, 
+the 4th order statistic of the list [5, 99, 23, 14, 6] is 23; the sorted list 
+is [5, 6, 14, 23, 99], and 23 is the 4th element.  Some special cases:
+\begin{itemize}
+  \item The 1-th order statistic is the \emph{minimum} element
+  \item The $n$-th order statistic is the \emph{maximum} element
+  \item The $\frac{n}{2}$-th order statistic is the \emph{median} element
+\end{itemize}
+The program converts command line arguments into $i$ and an
+array of integers.  It then sorts the array and outputs the $i$-th 
+element.  It does so by calling a series of functions.
+
+\subsubsection*{Instructions}
+
+\begin{enumerate}
+  \item Complete question 1 on your worksheet.
+  \item Open the \mintinline{text}{OrderStatistic.java} source file and
+	study the code (do not make any changes).  In particular, read
+	the signatures for each method and their documentation to
+	learn what each one does.  
+  \item Compile and run the program with the following input values: \\
+	\mintinline{text}{4 99 23 76 100 8 3 0 1 72 104 1000 12 18 14}
+  \item Answer the relevant questions on your worksheet.
+\end{enumerate}
+
+\subsection{Writing A Method}
+
+Open the \mintinline{text}{Sine.java} source file.  This is a skeleton 
+program similar to a previous lab exercise that uses a Taylor series
+to compute $\sin{x}$.  Modify the program so that the code that
+computes $\sin{x}$ is encapsulated into a function:
+
+\begin{enumerate}
+  \item Write a method signature for this method: what is its return
+  	type?  What are its parameters?  
+  \item Write the method definition by moving the code from the \mintinline{java}{main}
+  	method to your method.
+  \item Modify the code in the \mintinline{java}{main} method to use your new
+  	method.
+  \item Compile and test your program.
+\end{enumerate}
+
+\subsection{Writing More Methods}
+
+Open the \mintinline{text}{PhysicsCalc.java} source file.  This is a skeleton 
+program that you'll complete using your own methods.  This program 
+will prompt the user for the following input:
+\begin{itemize}
+  \item The distance an object traveled from point 1 to point 2 (variable distance)
+  \item The time required to travel distance (variable time)
+  \item The object's initial velocity (variable initVelocity)
+  \item The mass of the object (variable mass)
+\end{itemize}
+
+You will need to write a series of methods that will calculate the force of the 
+object using the instructions below.  Each method should be independent 
+from the others (i.e., the force method shouldn't call the acceleration method, 
+and the acceleration method shouldn't call the velocity method).  
+
+\begin{enumerate}
+  \item Write a method that calculates the average velocity, using the equation 
+	$$v = \frac{\textrm{distance}}{\textrm{time}}$$
+  \item Write a method that calculates the average acceleration using the equation
+	$$a = \frac{v - v_0}{\textrm{time}}$$
+  	where $v$ is the current velocity and $v_0$ is the initial velocity.  For your 
+	program, use the average velocity as the current velocity.
+  \item Write another method that calculates the force of an object using the equation
+	$$F = ma$$
+	where $m$ is the mass of the object and $a$ is the acceleration.  
+  \item Add a print statement to print your result to the screen.
+  \item Answer question 3 on the worksheet and demonstrate your program to 
+  	the lab instructor.
+\end{enumerate}
+	
+\section{Advanced Activity (Optional)}
+
+Write a few more methods in the \mintinline{text}{OrderStatistics.java} program.  First,
+write a method that gets the \emph{median} of a list of elements.  However, the
+method should \emph{not} make changes to the array.  Instead, write additional
+methods that create a \emph{copy} of the array and sorts the copy so that it can
+find the median element.  
+
+\end{document}
