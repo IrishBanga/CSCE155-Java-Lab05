@@ -1,7 +1,5 @@
 \documentclass[12pt]{scrartcl}
 
-
-
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{.25cm}
 
@@ -20,9 +18,8 @@
   menucolor=darkred,
   urlcolor=blue,
   pdfpagemode=none,
-  pdftitle={CS1 - Lab 5.0 - Java},
-  pdfauthor={Christopher M. Bourke},
-  pdfkeywords={}
+  pdftitle={Lab 5.0 - Methods},
+  pdfauthor={Christopher M. Bourke}
 }
 
 \definecolor{MyDarkBlue}{rgb}{0,0.08,0.45}
@@ -57,7 +54,7 @@
 \SetupFloatingEnvironment{listing}{listname=List of Code Samples}
 
 \title{CSCE 155 - Java}
-\subtitle{Lab 5.0 - Methods}
+\subtitle{Lab 5.0 - Methods \& Testing}
 \author{~}
 \date{~}
 
@@ -70,13 +67,21 @@
 Before attending this lab:
 \begin{enumerate}
   \item Read and familiarize yourself with this handout.
-  \item Review the lecture notes on conditionals, or the following free textbook resource: \url{http://www.toves.org/books/java/ch12-methods/index.html}
+  \item Read Chapters 5 and 29 of the \href{http://cse.unl.edu/~cbourke/ComputerScienceOne.pdf}{Computer Science I} textbook
 \end{enumerate}
 
 \section*{Peer Programming Pair-Up}
 
-To encourage collaboration and a team environment, labs will be
-structured in a \emph{pair programming} setup.  At the start of
+\textbf{For students in the online section:} you may complete
+the lab on your own if you wish or you may team up with a partner
+of your choosing, or, you may consult with a lab instructor to get
+teamed up online (via Zoom).
+
+\textbf{For students in the face-to-face section:} your
+lab instructor will team you up with a partner.  
+
+To encourage collaboration and a team environment, labs are be
+structured in a \emph{peer programming} setup.  At the start of
 each lab, you will be randomly paired up with another student 
 (conflicts such as absences will be dealt with by the lab instructor).
 One of you will be designated the \emph{driver} and the other
@@ -102,47 +107,57 @@ others which may mean that you will not be able to complete the
 lab.  
 
 \section{Lab Objectives \& Topics}
-At the end of this lab you should be familiar with the following
+At the end of this lab you should be familiar with the following:
 \begin{itemize}
-  \item Know how to write and use methods
-  \item Know the difference between a method prototype and method definition
+  \item Understand how to design, document, write, and use methods in Java
+  \item Design test cases and write informal unit tests
 \end{itemize}
 
 \section{Background}
 
 Most programming languages allow you to define and use functions 
-(or methods).  Functions are reusable blocks of code that can be 
-packaged as a single unit.  A function can be specified to inputs 
-(parameters, arguments) and return an output.  Defining functions 
-has several advantages.  First, it facilitates code reuse.  Rather than 
-cutting and pasting the same block of code, it can be encapsulated 
+(or \emph{methods}).  Functions \emph{encapsulate} functionality into a 
+unit of code that can be reused.  A function can be specified to 
+take any number of inputs (called parameters or arguments) and 
+return an output.  Defining and using functions has several advantages.  
+First, it facilitates code reuse.  Rather than 
+cutting and pasting a block of code, it can be encapsulated 
 into a function and reused by calling the function anytime it needs 
 to be executed.
 
-Second, functions facilitate \emph{procedural abstraction}.  Often 
-times, we don't care or need to worry about the implementation 
+Second, functions facilitate \emph{procedural abstraction}.  Often, 
+we don't care or need to worry about the implementation 
 details of a certain algorithm or procedure.  By encapsulating the 
 details in a function, we only need to know how to use it (what 
-inputs to provide it and what output we can expect from it) and 
-not need to worry about how it computes its result.  For example,
+inputs to provide it and what output we can expect from it).  We
+don't need to worry about \emph{how} it computes its result.  For example,
 up to now you've been using the standard math library's function
 to compute the square root of a number $x$, but you haven't
 had to worry about the details of how this computation actually
 takes place.
 
-When defining a function, it is necessary to declare its \emph{signature}.  
+Finally, functions naturally define a \emph{unit} of code that can
+be easily tested.  Typically, unit tests are designed with 
+\emph{test cases} which are input/output combinations that are
+known to be correct.  Unit testing involves feeding the input to
+a function and comparing the output to the \emph{expected} output.
+If they match, we say the test case \emph{passes}, if not, we say
+it \emph{fails}.  Unit testing gives a higher level of confidence
+that our function's implementation is correct.
+
+When defining a function, it is necessary to define its \emph{signature}.  
 The signature of a function includes:
 \begin{itemize}
   \item The function's identifier -- its name 
-  \item The return type -- the type of variable the function returns)
+  \item The return type -- the type of variable the function returns
   \item The parameter list -- the number of parameters the function takes 
-	(also called its \emph{arity}) along with the types 
+	(also called its \emph{arity}) along with their types 
 \end{itemize}
 
 \subsection{Methods in Java}
 
 In Java, functions (usually called methods) must be declared/defined 
-within a class.  This is done by declaring the method?s signature and 
+within a class.  This is done by declaring the method's signature and 
 adding a block of code that specifies the instructions that will be executed 
 when the method is invoked.  In addition, there are two modifiers that 
 can be applied to methods:
@@ -162,111 +177,156 @@ We have provided partially completed programs for each of the
 following activities.  Clone the lab's code from GitHub using the 
 following URL: \url{https://github.com/cbourke/CSCE155-Java-Lab05}.
 
-\subsection{Using Methods}
+\subsection{Writing Methods}
 
-The file \mintinline{text}{OrderStatistic.java} contains code necessary
-to find the $i$-th order statistic of a collection of numbers.   The $i$-th order 
-statistic corresponds to the $i$-th element in a sorted list.  For example, 
-the 4th order statistic of the list [5, 99, 23, 14, 6] is 23; the sorted list 
-is [5, 6, 14, 23, 99], and 23 is the 4th element.  Some special cases:
-\begin{itemize}
-  \item The 1-th order statistic is the \emph{minimum} element
-  \item The $n$-th order statistic is the \emph{maximum} element
-  \item The $\frac{n}{2}$-th order statistic is the \emph{median} element
-\end{itemize}
-The program converts command line arguments into $i$ and an
-array of integers.  It then sorts the array and outputs the $i$-th 
-element.  It does so by calling a series of functions.
+Images are made up of individual \emph{pixels}.  Each pixel can be 
+represented using an RGB (red-blue-green) color scheme.  RGB is 
+generally used in displays and models a color with three integer 
+values in the range $[0, 255]$ corresponding to the red, green and 
+blue ``contribution'' to the color.  For example, the triple 
+$(255, 255, 0)$ corresponds to a full red and green (additive) value
+which results in yellow.  
+
+Two common image filters are a black-and-white filter which transforms
+an image into an equivalent gray-scale image, and a sepia filter which
+transforms a photo to a reddish-brown monochrome to give it an old-timey
+look.
+
+We have already written a substantial program that processes an image
+file and applies one of these filters.  However, you will need to write
+the functions responsible for transforming an RGB value into a gray-scale
+or sepia RGB value.  
+
+To convert an RGB value to gray-scale you can use one of several
+different techniques.  Each technique ``removes'' the color value by
+setting all three RGB values to the same value but each technique 
+does so in a slightly different way.
+
+The first technique is to simply take the average of all three values:
+  $$\frac{r + g + b}{3}$$
+
+The second technique, known as the ``lightness'' technique averages 
+the most prominent and least prominent colors:
+  $$\frac{\max\{r, g, b\} + \min\{r, g, b\}}{2}$$
+
+The luminosity technique uses a weighted average to account for a human 
+perceptual preference toward green, setting all three values to:
+  $$0.21 r + 0.72 g + 0.07 b$$
+In all three cases, the integer values should be \emph{rounded} rather 
+than truncated.
+
+A sepia filter sets different values to each of the three RGB components 
+using the following formulas.  Given a current $(r,g,b)$ value, the sepia
+tone RGB value, $(r',g',b')$ would be:
+$$\begin{array}{ll}
+  r' &= 0.393r + 0.769g + 0.189b \\
+  g' &= 0.349r + 0.686g + 0.168b \\
+  b' &= 0.272r + 0.534g + 0.131b
+\end{array}$$
+As with the gray-scale techniques, values should be rounded.  Moreover, if
+any of the values exceeds 255, they should be reset to 255 to stay within
+the valid RGB color range.
 
 \subsubsection*{Instructions}
 
-\begin{enumerate}
-  \item Complete question 1 on your worksheet.
-  \item Open the \mintinline{text}{OrderStatistic.java} source file and
-	study the code (do not make any changes).  In particular, read
-	the signatures for each method and their documentation to
-	learn what each one does.  
-  \item Compile and run the program with the following input values: \\
-	\mintinline{text}{4 99 23 76 100 8 3 0 1 72 104 1000 12 18 14}
-  \item Answer the relevant questions on your worksheet.
-\end{enumerate}
+In this exercise, you will design and write a ``color utilities'' 
+library by implementing the methods described below.  We've provided 
+a class, \mintinline{java}{ColorUtils} with a few methods already
+completed for you.  You'll place your methods in the same class.
 
-\subsection{Writing A Method}
-
-Open the \mintinline{text}{Sine.java} source file.  This is a skeleton 
-program similar to a previous lab exercise that uses a Taylor series
-to compute $\sin{x}$.  Modify the program so that the code that
-computes $\sin{x}$ is encapsulated into a function:
-
-\begin{enumerate}
-  \item Write a method signature for this method: what is its return
-  	type?  What are its parameters?  
-  \item Write the method definition by moving the code from the \mintinline{java}{main}
-  	method to your method.
-  \item Modify the code in the \mintinline{java}{main} method to use your new
-  	method.
-  \item Compile and test your program.
-\end{enumerate}
-
-\subsection{Writing More Methods}
-
-Open the \mintinline{text}{PhysicsCalc.java} source file.  This is a skeleton 
-program that you'll complete using your own methods.  This program 
-will prompt the user for the following input:
 \begin{itemize}
-  \item The distance an object traveled from point 1 to point 2 (variable distance)
-  \item The time required to travel distance (variable time)
-  \item The object's initial velocity (variable initVelocity)
-  \item The mass of the object (variable mass)
+
+  \item Run the \mintinline{java}{ColorUtilsTester} file which 
+  contains several informal unit tests for the methods in 
+  \mintinline{java}{ColorUtils}.  Observe that one of the tests
+  will fail.  Fix the \mintinline{java}{toGrayScaleAverage} method so 
+  that it passes the test.  Use this as an opportunity to observe:
+  \begin{itemize}
+    \item How to use the \mintinline{java}{RGB} class 
+    \item How methods are defined in Java
+    \item How methods are documented in Java
+  \end{itemize}
+  
+  Be sure to write doc-style documentation for all of
+  the following methods.
+  
+  \item Write a helper method that returns the \emph{minimum}
+  of 3 integers.  Name your function \mintinline{java}{min}.
+
+  \item Write a method that takes an \mintinline{java}{RGB} value and
+  uses the lightness technique to return the gray-scale 
+  \mintinline{java}{RGB} value.  
+  Name your method \mintinline{java}{toGrayScaleLightness}
+
+  \item Write a method that takes an \mintinline{java}{RGB} value and
+  uses the luminosity technique to return the gray-scale 
+  \mintinline{java}{RGB} value.  
+  Name your method \mintinline{java}{toGrayScaleLuminosity}
+
+  \item Write a method that takes an \mintinline{java}{RGB} value and
+  computes a sepia-tone \mintinline{java}{RGB} value.
+  Name your method \mintinline{java}{toSepia}.
+  
+  \item Write doc-style documentation for all your functions.
 \end{itemize}
 
-You will need to write a series of methods that will calculate the force of the 
-object using the instructions below.  Each method should be independent 
-from the others (i.e., the force method shouldn't call the acceleration method, 
-and the acceleration method shouldn't call the velocity method).  
+\subsection{Ad-Hoc Testing}
 
-\begin{enumerate}
-  \item Write a method that calculates the average velocity, using the equation 
-	$$v = \frac{\textrm{distance}}{\textrm{time}}$$
-  \item Write a method that calculates the average acceleration using the equation
-	$$a = \frac{v - v_0}{\textrm{time}}$$
-  	where $v$ is the current velocity and $v_0$ is the initial velocity.  For your 
-	program, use the average velocity as the current velocity.
-  \item Write another method that calculates the force of an object using the equation
-	$$F = ma$$
-	where $m$ is the mass of the object and $a$ is the acceleration.  
-  \item Add a print statement to print your result to the screen.
-  \item Answer question 3 on the worksheet.
-\end{enumerate}
+We've provided an application interface (see \mintinline{java}{ImageDriver}
+that loads an image (specified as command line arguments) and uses your
+methods to convert the image and save it to a new file.
 
+Do some \emph{ad-hoc testing} using this application: convert the
+images provided as part of the project and view the results.  You 
+can also try converting some of your own images.  If your functions
+are correct, the image conversion should look something like 
+Figure \ref{fig:imageComparisons}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.20]{../images/memorialStadium}
+\includegraphics[scale=0.20]{../images/memorialStadiumSepia}
+\caption{Memorial Stadium.  Original image (left) and Sepia-toned image (right).}
+\label{fig:imageComparisons}
+\end{figure}
+
+\subsection{Writing Tests}
+
+Testing is a fundamental step in software development.  The most common types
+of tests are \emph{unit tests} and the most common ``unit'' is a function.
+You may have already ``tested'' your functions by running the project and 
+viewing the resulting images.  However, for your final activity, you will
+write (informal) \emph{automated} unit tests to test your functions more 
+rigorously.  
+
+Some starter unit testing code has already been provided in 
+\mintinline{java}{ColorUtilsTester}.  Each block of code calls a function
+with some inputs and compares the return value to the \emph{expected}
+output.  If they match, the test passes, if not it fails.  A message is
+printed to the user and the total number of passed/failed test cases is
+reported.  
+
+Using this starter code as an example, add more test cases for the 
+other functions.  You should write at least 1 test case for 
+\emph{each} function you wrote.  
 
 \section{Handin/Grader Instructions}
 
 \begin{enumerate}
   \item Hand in your completed files:
-    \begin{itemize}
-    \item \mintinline{text}{PhysicsCalc.java}
-    \item \mintinline{text}{worksheet.md}
+  \begin{itemize}
+    \item \mintinline{text}{ColorUtils.java}
+    \item \mintinline{text}{ColorUtilsTester.java}
   \end{itemize}
   through the webhandin (\url{https://cse-apps.unl.edu/handin}) 
   using your cse login and password.  
   \item Even if you worked with a partner, you \emph{both} should
   turn in all files.
   \item Verify your program by grading yourself through the
-  webgrader (\url{https://cse.unl.edu/~cse155h/grade/}) using the
+  webgrader (\url{https://cse.unl.edu/~cse155e/grade/}) using the
   same credentials.
-  \item Recall that both expected output and your program's output
-  will be displayed.  The formatting may differ slightly which is fine.
-  As long as your program successfully compiles, runs and outputs 
-  the \emph{same values}, it is considered correct.
 \end{enumerate}
-	
-\section{Advanced Activity (Optional)}
 
-Write a few more methods in the \mintinline{text}{OrderStatistics.java} program.  First,
-write a method that gets the \emph{median} of a list of elements.  However, the
-method should \emph{not} make changes to the array.  Instead, write additional
-methods that create a \emph{copy} of the array and sorts the copy so that it can
-find the median element.  
+
 
 \end{document}
