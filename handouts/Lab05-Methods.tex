@@ -80,7 +80,7 @@ teamed up online (via Zoom).
 \textbf{For students in the face-to-face section:} your
 lab instructor will team you up with a partner.  
 
-To encourage collaboration and a team environment, labs are be
+To encourage collaboration and a team environment, labs are
 structured in a \emph{peer programming} setup.  At the start of
 each lab, you will be randomly paired up with another student 
 (conflicts such as absences will be dealt with by the lab instructor).
@@ -92,7 +92,7 @@ telling the driver what to do next.  The driver will be in charge of the
 keyboard and workstation.  Both driver and navigator are responsible
 for suggesting fixes and solutions together.  Neither the navigator
 nor the driver is ``in charge.''  Beyond your immediate pairing, you
-are encouraged to help and interact and with other pairs in the lab.
+are encouraged to help and interact with other pairs in the lab.
 
 Each week you should alternate: if you were a driver last week, 
 be a navigator next, etc.  Resolve any issues (you were both drivers
@@ -273,8 +273,14 @@ completed for you.  You'll place your methods in the same class.
 \subsection{Ad-Hoc Testing}
 
 We've provided an application interface (see \mintinline{java}{ImageDriver}
-that loads an image (specified as command line arguments) and uses your
-methods to convert the image and save it to a new file.
+that loads and saves images specified as \emph{command line arguments}.
+\begin{itemize}
+  \item You only need to specify the file names
+  \item It is assumed the files are in the \mintinline{text}{images}
+  \item The output file will be in the same directory, you may need to
+  \emph{refresh} your project in Eclipse if they do not show up automatically
+\end{itemize}
+The program uses your methods to convert the image and save it to a new file.
 
 Do some \emph{ad-hoc testing} using this application: convert the
 images provided as part of the project and view the results.  You 
@@ -323,7 +329,7 @@ other functions.  You should write at least 1 test case for
   \item Even if you worked with a partner, you \emph{both} should
   turn in all files.
   \item Verify your program by grading yourself through the
-  webgrader (\url{https://cse.unl.edu/~cse155e/grade/}) using the
+  webgrader (\url{https://cse.unl.edu/~cse155h/grade/}) using the
   same credentials.
 \end{enumerate}
 
