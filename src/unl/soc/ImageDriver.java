@@ -1,4 +1,4 @@
-package unl.cse;
+package unl.soc;
 
 /**
  * This class is the main "application": it provides an interface to the user

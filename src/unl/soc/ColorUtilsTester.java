@@ -1,4 +1,4 @@
-package unl.cse;
+package unl.soc;
 
 /**
  * This class is a test suite (a collection of unit tests) for methods in the
