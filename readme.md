@@ -251,8 +251,8 @@ match, the test passes, if not it fails. A message is printed to the
 user and the total number of passed/failed test cases is reported.
 
 Using this starter code as an example, add more test cases for the other
-functions. You should write at least 1 test case for *each* function you
-wrote.
+functions. You should write *at least* 1 test case for *each* function you
+wrote for a total of 17.
 
 # Handin/Grader Instructions
 

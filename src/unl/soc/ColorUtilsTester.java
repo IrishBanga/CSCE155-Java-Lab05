@@ -22,6 +22,15 @@ public class ColorUtilsTester {
 	}
 
 	public static void main(String args[]) {
+		
+		boolean reportPass = false;
+		if(args.length == 1) {
+			if(args[0].equals("-reportPass")) {
+				reportPass = true;
+			} else {
+				System.err.println("Unrecognized CLA: " + args[0]);
+			}
+		}
 
 		int c;
 		int x = 10, y = 20, z = 30;
@@ -186,6 +195,11 @@ public class ColorUtilsTester {
 		System.out.printf("Number Test Cases Failed: %6d\n", numFailed);
 		System.out.printf("Percent Passed:           %6.2f\n", 100.0 * numPassed / (numPassed + numFailed));
 
+		if(reportPass) {
+			System.exit(numPassed);			
+		} else {
+			System.exit(numFailed);
+		}
 	}
 
 }
