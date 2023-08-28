@@ -190,6 +190,11 @@ public class ColorUtilsTester {
 		}
 
 		// TODO: add your test cases here
+		//   - You should write at least 1 test case for each of the
+		//     methods: min(), toGrayScaleLightness(), 
+		//     toGrayScaleLuminosity(), and toSepia()
+		//   - There should be a total of at least 18 passing
+		//     test cases
 
 		System.out.printf("Number Test Cases Passed: %6d\n", numPassed);
 		System.out.printf("Number Test Cases Failed: %6d\n", numFailed);

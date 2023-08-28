@@ -252,7 +252,7 @@ user and the total number of passed/failed test cases is reported.
 
 Using this starter code as an example, add more test cases for the other
 functions. You should write *at least* 1 test case for *each* function you
-wrote for a total of 17.
+wrote for a total of 18.
 
 # Handin/Grader Instructions
 
