@@ -182,11 +182,11 @@ place your methods in the same class.
 
 -   Run the `ColorUtilsTester.java` file which contains several
     informal unit tests for the methods in `ColorUtils.java`. Observe
-    that one of the tests will fail. Fix the `toGrayScaleAverage.java`
+    that one of the tests will fail. Fix the `toGrayScaleAverage()`
     method so that it passes the test. Use this as an opportunity to
     observe:
 
-    -   How to use the `RGB.java` class
+    -   How to use the `RGB` class
 
     -   How methods are defined in Java
 
@@ -198,16 +198,16 @@ place your methods in the same class.
 -   Write a helper method that returns the *minimum* of 3 integers. Name
     your function `min`.
 
--   Write a method that takes an `RGB.java` value and uses the
-    lightness technique to return the gray-scale `RGB.java` value.
-    Name your method `toGrayScaleLightness.java`
+-   Write a method that takes an `RGB` value and uses the
+    lightness technique to return the gray-scale `RGB` value.
+    Name your method `toGrayScaleLightness()`
 
--   Write a method that takes an `RGB.java` value and uses the
-    luminosity technique to return the gray-scale `RGB.java` value.
-    Name your method `toGrayScaleLuminosity.java`
+-   Write a method that takes an `RGB()` value and uses the
+    luminosity technique to return the gray-scale `RGB()` value.
+    Name your method `toGrayScaleLuminosity()`
 
--   Write a method that takes an `RGB.java` value and computes a
-    sepia-tone `RGB.java` value. Name your method `toSepia.java`.
+-   Write a method that takes an `RGB` value and computes a
+    sepia-tone `RGB` value. Name your method `toSepia()`.
 
 -   Write javadoc-style documentation for all your functions.
 
