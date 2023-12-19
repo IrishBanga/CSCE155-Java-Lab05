@@ -195,6 +195,51 @@ public class ColorUtilsTester {
 		//     toGrayScaleLuminosity(), and toSepia()
 		//   - There should be a total of at least 18 passing
 		//     test cases
+		System.out.printf("TESTING: min(%d,%d,%d): ", x, y, z);
+		result = ColorUtils.min(x, y, z);
+		if (result != 10) {
+			System.out.printf("FAILED: min returned %d, expected 10\n", result);
+			numFailed++;
+		} else {
+			System.out.printf("PASSED\n");
+			numPassed++;
+		}
+
+		input = new RGB(100, 39, 40);
+		expected = new RGB(70, 70, 70);
+		System.out.printf("TESTING: toGrayScaleLightness(%s): ", input);
+		actual = ColorUtils.toGrayScaleLightness(input);
+		if (!actual.equals(expected)) {
+			System.out.printf("FAILED: toGrayScaleLightness returned %s, expected %s\n", actual, expected);
+			numFailed++;
+		} else {
+			System.out.printf("PASSED\n");
+			numPassed++;
+		}
+
+		input = new RGB(100, 39, 40);
+		expected = new RGB(52, 52, 52);
+		System.out.printf("TESTING: toGrayScaleLuminosity(%s): ", input);
+		actual = ColorUtils.toGrayScaleLuminosity(input);
+		if (!actual.equals(expected)) {
+			System.out.printf("FAILED: toGrayScaleLuminosity returned %s, expected %s\n", actual, expected);
+			numFailed++;
+		} else {
+			System.out.printf("PASSED\n");
+			numPassed++;
+		}
+
+		input = new RGB(100, 39, 40);
+		expected = new RGB(77, 68, 53);
+		System.out.printf("TESTING: toSepia(%s): ", input);
+		actual = ColorUtils.toSepia(input);
+		if (!actual.equals(expected)) {
+			System.out.printf("FAILED: toSepia returned %s, expected %s\n", actual, expected);
+			numFailed++;
+		} else {
+			System.out.printf("PASSED\n");
+			numPassed++;
+		}
 
 		System.out.printf("Number Test Cases Passed: %6d\n", numPassed);
 		System.out.printf("Number Test Cases Failed: %6d\n", numFailed);

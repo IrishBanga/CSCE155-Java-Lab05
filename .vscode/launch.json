@@ -1,0 +1,68 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ColorUtilsTester",
+            "request": "launch",
+            "mainClass": "unl.soc.ColorUtilsTester",
+            "projectName": "CSCE155-Java-Lab05"
+        },
+        {
+            "type": "java",
+            "name": "IDriver - avery Average",
+            "request": "launch",
+            "mainClass": "unl.soc.ImageDriver",
+            "args": "avery.jpg averyAverage.jpg 1",
+            "projectName": "CSCE155-Java-Lab05"
+        },
+        {
+            "type": "java",
+            "name": "IDriver - avery Lightness",
+            "request": "launch",
+            "mainClass": "unl.soc.ImageDriver",
+            "args": "avery.jpg averyLightness.jpg 2",
+            "projectName": "CSCE155-Java-Lab05"
+        },
+        {
+            "type": "java",
+            "name": "IDriver - avery Luminosity",
+            "request": "launch",
+            "mainClass": "unl.soc.ImageDriver",
+            "args": "avery.jpg averyLuminosity.jpg 3",
+            "projectName": "CSCE155-Java-Lab05"
+        },
+        {
+            "type": "java",
+            "name": "IDriver - avery Sepia",
+            "request": "launch",
+            "mainClass": "unl.soc.ImageDriver",
+            "args": "avery.jpg averySepia.jpg 4",
+            "projectName": "CSCE155-Java-Lab05"
+        },
+        {
+            "type": "java",
+            "name": "IDriver - memorialStadium Sepia",
+            "request": "launch",
+            "mainClass": "unl.soc.ImageDriver",
+            "args": "memorialStadium.jpg memorialStadSepia.jpg 4",
+            "projectName": "CSCE155-Java-Lab05"
+        },
+        {
+            "type": "java",
+            "name": "RGB",
+            "request": "launch",
+            "mainClass": "unl.soc.RGB",
+            "projectName": "CSCE155-Java-Lab05"
+        }
+    ]
+}
